@@ -1,0 +1,192 @@
+package Ordenamiento;
+
+import java.lang.*;
+import java.util.ArrayList;
+
+public class MergeSort<T> {
+    
+	
+	//////////////////////////////////para arrays
+	
+    // Wrapper method for the real algorithm
+    // T is the generic type which will be instantiated at runtime
+    //  elementas are required to be comparable
+    public static <T extends Comparable<T>> void sort(T[] a) {
+	mergesort(a, 0, a.length-1);
+    }
+    
+    // Recursive mergesort method, following the pseudocode
+    private static <T extends Comparable<T>> void mergesort (T[] a, int i, int j) {
+	if (j-i < 1) return;
+	int mid = (i+j)/2;
+	mergesort(a, i, mid);
+	mergesort(a, mid+1, j);
+	merge(a, i, mid, j);
+    }
+
+    // Merge method
+    // Here we need to allocate a new array, but Java does not allow allocating arrays of a generic type
+    // As a work-around we allocate an array of type Object[] the use type casting
+    // This would usually generate a warning, which is suppressed
+    private static <T extends Comparable<T>> void  merge(T[] a, int p, int mid, int q) {
+
+	Object[] tmp = new Object[q-p+1]; 
+	int i = p;
+	int j = mid+1;
+	int k = 0;
+	while (i <= mid && j <= q) {
+	    if (a[i].compareTo(a[j])<=0)
+		tmp[k] = a[i++];
+	    else
+		tmp[k] = a[j++];
+	    k++;
+	}
+	if (i <= mid && j > q) {
+	    while (i <= mid) 
+		tmp[k++] = a[i++];
+	} else {
+	    while (j <= q)
+		tmp[k++] = a[j++];
+	}
+	for (k = 0; k < tmp.length; k++) {
+	    a[k+p] = (T)(tmp[k]); // this is the line that woudl generate the warning 
+	}
+    }
+    
+    ////////////////// para array list
+    public static <T extends Comparable<T>> void sortArrayList(ArrayList<T> a) {
+    	mergesortArrayList(a, 0, a.size()-1);
+        }
+        
+    	private static <T extends Comparable<T>> void mergesortArrayList (ArrayList<T> a, int i, int j) {
+    	if (j-i < 1) return;
+    	int mid = (i+j)/2;
+    	mergesortArrayList(a, i, mid);
+    	mergesortArrayList(a, mid+1, j);
+    	mergeArrayList(a, i, mid, j);
+        }
+
+        // Merge method
+        // Here we need to allocate a new array, but Java does not allow allocating arrays of a generic type
+        // As a work-around we allocate an array of type Object[] the use type casting
+        // This would usually generate a warning, which is suppressed
+        private static <T extends Comparable<T>> void  mergeArrayList(ArrayList<T> a, int p, int mid, int q) {
+
+    	Object[] tmp = new Object[q-p+1]; 
+    	int i = p;
+    	int j = mid+1;
+    	int k = 0;
+    	while (i <= mid && j <= q) {
+    	    if (a.get(i).compareTo(a.get(j))<=0)
+    		tmp[k] = a.get(i++);
+    	    else
+    		tmp[k] = a.get(j++);
+    	    k++;
+    	}
+    	if (i <= mid && j > q) {
+    	    while (i <= mid) 
+    		tmp[k++] = a.get(i++);
+    	} else {
+    	    while (j <= q)
+    		tmp[k++] = a.get(j++);
+    	}
+    	for (k = 0; k < tmp.length; k++) {
+    	    a.set(k+p, (T)(tmp[k])) ; // this is the line that woudl generate the warning 
+    	}
+        }
+        
+        /////////////para linkedList
+        
+        public static<T extends Comparable<T>> void mergeSortLinkedList(Lista<T> lista) {
+            Nodo<T> head = lista.primero;
+            sortLinkedList( lista.primero);
+        }
+
+        private static<T extends Comparable<T>> Nodo<T> sortLinkedList( Nodo<T> head) {
+
+            if (head == null || head.getSiguiente() == null)
+                return head;
+
+            int totalNumberOfElements = getCount(head); ;
+
+            int mid = totalNumberOfElements / 2;
+
+            Nodo<T> currentNode = head;
+            Nodo<T> left = head;
+            Nodo<T> right = null;
+
+            int countHalf = 0;
+            while (currentNode != null) {
+                countHalf++;
+                Nodo<T> next = currentNode.getSiguiente();
+
+                if (countHalf == mid) {
+                    currentNode.setSiguiente(null);
+                    right = next;
+                }
+                currentNode = next;
+            }
+
+            Nodo<T> leftHalf = sortLinkedList(left);
+            Nodo<T> rightHalf = sortLinkedList(right);
+            Nodo<T> mergedLinkedList = merge(leftHalf, rightHalf);
+
+            return mergedLinkedList;
+        }
+
+        private  static<T extends Comparable<T>> Nodo<T> merge(Nodo<T> left, Nodo<T> right) {
+            Nodo<T> leftNode = left;
+            Nodo<T> rightNode = right;
+
+            Nodo<T> duplicateHead = new Nodo<T>(null, null);
+            Nodo<T> currentNode = duplicateHead;
+
+            while (leftNode != null || rightNode != null) {
+
+                if (leftNode == null) {
+                    currentNode.setSiguiente(new Nodo<T>(rightNode.getDato(), null));
+                    rightNode = rightNode.getSiguiente();
+                    currentNode = currentNode.getSiguiente();
+
+                } else if (rightNode == null) {
+                    currentNode.setSiguiente(new Nodo<T>(leftNode.getDato(), null));
+                    leftNode = leftNode.getSiguiente();
+                    currentNode = currentNode.getSiguiente();
+
+                } else {
+                    if (compare(leftNode.getDato(), rightNode.getDato()) < 0) {
+                        currentNode.setSiguiente(new Nodo<T>(leftNode.getDato(), null));
+                        leftNode = leftNode.getSiguiente();
+                        currentNode = currentNode.getSiguiente();
+
+                    } else if (compare(leftNode.getDato(), rightNode.getDato()) == 0) {
+                        currentNode.setSiguiente(new Nodo<T>(leftNode.getDato(), null));
+                        currentNode.getSiguiente().setSiguiente(new Nodo<T>(rightNode.getDato(), null)); 
+                        currentNode = currentNode.getSiguiente().getSiguiente();
+                        leftNode = leftNode.getSiguiente();
+                        rightNode = rightNode.getSiguiente();
+
+                    } else {
+                        currentNode.setSiguiente( new Nodo<T>(rightNode.getDato(), null));
+                        rightNode = rightNode.getSiguiente();
+                        currentNode = currentNode.getSiguiente();
+                    }
+                }
+            }
+
+            return duplicateHead.getSiguiente();
+        }
+
+        private static <T> int getCount(Nodo<T> head) {
+            int count = 0;
+            while (head != null) {
+                count++;
+                head = head.getSiguiente();
+            }
+            return count;
+        }
+
+        public static<T extends Comparable<T>> int compare(T t, T t2) {
+            return  t.compareTo(t2);
+        }
+}

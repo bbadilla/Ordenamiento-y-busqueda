@@ -1,0 +1,38 @@
+package Ordenamiento;
+
+import java.util.ArrayList;
+
+public class SelectionSort<E> {
+	
+	 //para arrays
+	 public static <E extends Comparable<E>> void selectionArray(E[] arr){
+         
+	        for (int i = 0; i < arr.length - 1; i++)
+	        {
+	            int index = i;
+	            for (int j = i + 1; j < arr.length; j++)
+	                if (arr[j].compareTo(arr[index])<0 )
+	                    index = j;
+	      
+	            E smallerNumber = arr[index]; 
+	            arr[index] = arr[i];
+	            arr[i] = smallerNumber;
+	        }
+	 }
+	 
+	 ///para arraylist
+	 public static <E extends Comparable<E>> void selectionArrayList(ArrayList<E> arr){
+         
+	        for (int i = 0; i < arr.size() - 1; i++)
+	        {
+	            int index = i;
+	            for (int j = i + 1; j < arr.size(); j++)
+	                if (arr.get(j).compareTo(arr.get(index))<0 )
+	                    index = j;
+	      
+	            E smallerNumber = arr.get(index); 
+	            arr.set(index, arr.get(i));
+	            arr.set(index, smallerNumber);
+	        }
+	 }
+}

@@ -1,0 +1,176 @@
+package Ordenamiento;
+
+import java.lang.*;
+import java.util.ArrayList;
+
+public class MergeSort<T> {
+    
+	
+	//////////////////////////////////para arrays
+	
+    // Wrapper method for the real algorithm
+    // T is the generic type which will be instantiated at runtime
+    //  elementas are required to be comparable
+    public static <T extends Comparable<T>> void sort(T[] a) {
+	mergesort(a, 0, a.length-1);
+    }
+    
+    // Recursive mergesort method, following the pseudocode
+    private static <T extends Comparable<T>> void mergesort (T[] a, int i, int j) {
+	if (j-i < 1) return;
+	int mid = (i+j)/2;
+	mergesort(a, i, mid);
+	mergesort(a, mid+1, j);
+	merge(a, i, mid, j);
+    }
+
+    // Merge method
+    // Here we need to allocate a new array, but Java does not allow allocating arrays of a generic type
+    // As a work-around we allocate an array of type Object[] the use type casting
+    // This would usually generate a warning, which is suppressed
+    private static <T extends Comparable<T>> void  merge(T[] a, int p, int mid, int q) {
+
+	Object[] tmp = new Object[q-p+1]; 
+	int i = p;
+	int j = mid+1;
+	int k = 0;
+	while (i <= mid && j <= q) {
+	    if (a[i].compareTo(a[j])<=0)
+		tmp[k] = a[i++];
+	    else
+		tmp[k] = a[j++];
+	    k++;
+	}
+	if (i <= mid && j > q) {
+	    while (i <= mid) 
+		tmp[k++] = a[i++];
+	} else {
+	    while (j <= q)
+		tmp[k++] = a[j++];
+	}
+	for (k = 0; k < tmp.length; k++) {
+	    a[k+p] = (T)(tmp[k]); // this is the line that woudl generate the warning 
+	}
+    }
+    
+    ////////////////// para array list
+    public static <T extends Comparable<T>> void sortArrayList(ArrayList<T> a) {
+    	mergesortArrayList(a, 0, a.size()-1);
+        }
+        
+    	private static <T extends Comparable<T>> void mergesortArrayList (ArrayList<T> a, int i, int j) {
+    	if (j-i < 1) return;
+    	int mid = (i+j)/2;
+    	mergesortArrayList(a, i, mid);
+    	mergesortArrayList(a, mid+1, j);
+    	mergeArrayList(a, i, mid, j);
+        }
+
+        // Merge method
+        // Here we need to allocate a new array, but Java does not allow allocating arrays of a generic type
+        // As a work-around we allocate an array of type Object[] the use type casting
+        // This would usually generate a warning, which is suppressed
+        private static <T extends Comparable<T>> void  mergeArrayList(ArrayList<T> a, int p, int mid, int q) {
+
+    	Object[] tmp = new Object[q-p+1]; 
+    	int i = p;
+    	int j = mid+1;
+    	int k = 0;
+    	while (i <= mid && j <= q) {
+    	    if (a.get(i).compareTo(a.get(j))<=0)
+    		tmp[k] = a.get(i++);
+    	    else
+    		tmp[k] = a.get(j++);
+    	    k++;
+    	}
+    	if (i <= mid && j > q) {
+    	    while (i <= mid) 
+    		tmp[k++] = a.get(i++);
+    	} else {
+    	    while (j <= q)
+    		tmp[k++] = a.get(j++);
+    	}
+    	for (k = 0; k < tmp.length; k++) {
+    	    a.set(k+p, (T)(tmp[k])) ; // this is the line that woudl generate the warning 
+    	}
+        }
+        
+        /////////////para linkedList
+        public static <E extends Comparable<? super E>> Nodo<E> mergesort(final Nodo<E> head) {
+            if (head == null || head.getSiguiente() == null) {
+                return head;
+            }
+
+            return mergesortImpl(head);
+        }
+
+        private static <E extends Comparable<? super E>> Nodo<E> mergesortImpl(final Nodo<E> head) {
+            if (head.getSiguiente() == null) {
+                return head;
+            }
+
+            final Nodo<E> leftSublistHead  = head;
+            final Nodo<E> rightSublistHead = head.getSiguiente();
+
+            Nodo<E> leftSublistTail  = leftSublistHead;
+            Nodo<E> rightSublistTail = rightSublistHead;
+
+            Nodo<E> currentNode = rightSublistHead.getSiguiente();
+            boolean left = true;
+
+            // Split the input linked list into two smaller linked lists:
+            while (currentNode != null) {
+                if (left) {
+                    leftSublistTail.setSiguiente(currentNode);
+                    leftSublistTail = currentNode;
+                    left = false;
+                } else {
+                    rightSublistTail.setSiguiente(currentNode);
+                    rightSublistTail = currentNode;
+                    left = true;
+                }
+
+                currentNode = currentNode.getSiguiente();
+            }
+
+            leftSublistTail.setSiguiente(null);
+            rightSublistTail.setSiguiente(null);
+
+            return merge(mergesortImpl(leftSublistHead),mergesortImpl(rightSublistHead));
+        }
+
+        private static <E extends Comparable<? super E>> Nodo<E> merge(Nodo<E> leftSortedListHead,Nodo<E> rightSortedListHead) {
+            Nodo<E> mergedListHead;
+            Nodo<E> mergedListTail;
+
+            if (rightSortedListHead.getDato().compareTo(leftSortedListHead.getDato()) < 0) {
+                mergedListHead = rightSortedListHead;
+                mergedListTail = rightSortedListHead;
+                rightSortedListHead = rightSortedListHead.getSiguiente();
+            } else {
+                mergedListHead = leftSortedListHead;
+                mergedListTail = leftSortedListHead;
+                leftSortedListHead  = leftSortedListHead.getSiguiente();
+            }
+
+            while (leftSortedListHead != null && rightSortedListHead != null) {
+                if (rightSortedListHead.getDato().compareTo(leftSortedListHead.getDato()) > 0) {
+                    mergedListTail.setSiguiente(rightSortedListHead);
+                    mergedListTail = rightSortedListHead;
+                    rightSortedListHead = rightSortedListHead.getSiguiente();
+                } else {
+                    mergedListTail.setSiguiente(leftSortedListHead);
+                    mergedListTail = leftSortedListHead;
+                    leftSortedListHead = leftSortedListHead.getSiguiente();
+                }
+            }
+
+            if (leftSortedListHead != null) {
+                mergedListTail.setSiguiente(leftSortedListHead);
+            } else {
+                mergedListTail.setSiguiente(rightSortedListHead);
+            }
+
+            return mergedListHead;
+        }
+}

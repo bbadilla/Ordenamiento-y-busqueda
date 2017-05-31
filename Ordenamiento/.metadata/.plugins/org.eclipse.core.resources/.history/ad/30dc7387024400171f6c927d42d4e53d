@@ -1,0 +1,13 @@
+package Ordenamiento;
+
+public class Nodo {
+    Nodo siguiente;
+    int dato;
+    public Nodo(int nodo)
+    {
+        this.dato = dato;
+        this.siguiente = null;
+        
+    }
+    
+}

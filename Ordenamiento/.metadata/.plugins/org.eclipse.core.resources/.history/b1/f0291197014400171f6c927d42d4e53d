@@ -1,0 +1,92 @@
+import javax.swing.JOptionPane;
+
+public class Lista {
+    private Nodo primero;
+    private Nodo ultimo;
+    private int size;
+    
+    public void lista()
+    {
+        this.primero=null;
+        this.ultimo=null;
+        this.size=0;
+    }
+    
+    public boolean siVacio()
+    {
+        return(this.primero == null);
+    }
+    
+    public Lista insertarFinal(int dato)
+    {
+        if(siVacio())
+        {
+            Nodo nuevo = new Nodo(dato);
+            primero = nuevo;
+            ultimo = nuevo;
+            nuevo.siguiente= null;
+        }
+        else
+        {
+            Nodo nuevo = new Nodo(dato);
+            nuevo.siguiente=null;
+            ultimo.siguiente = nuevo;
+            ultimo = nuevo;
+        }
+        
+        this.size++;
+        return this; 
+    }
+    
+    public void borrarFinal()
+    {
+        Nodo eliminar = null;
+        if(siVacio())
+        {
+            JOptionPane.showInternalMessageDialog(null, "La lista esta vacia");
+            
+        }
+        if(primero == ultimo)
+        {
+            primero = null;
+            ultimo = null;
+        }
+        else
+        {
+            Nodo actual = primero;
+            while(actual.siguiente!= ultimo)
+            {
+                actual = actual.siguiente;
+            }
+            eliminar = actual.siguiente;
+            actual.siguiente = null;
+            ultimo= actual;
+        }
+        this.size--;
+        
+    }
+    
+    public void size()
+    {
+        JOptionPane.showMessageDialog(null, "tanio igual a:"+"\n"+this.size,"Mensaje",JOptionPane.INFORMATION_MESSAGE );
+        
+    }
+    
+    public void imprimir()
+    {
+        if(this.size!= 0)
+        {
+            Nodo temp= primero;
+            String str="";
+            for(int i=0; i<this.size; i++)
+            {
+                str = str+temp.dato+"\n";
+                temp = temp.siguiente;
+            }
+            JOptionPane.showMessageDialog(null, str);
+            
+        }
+    }
+
+
+}

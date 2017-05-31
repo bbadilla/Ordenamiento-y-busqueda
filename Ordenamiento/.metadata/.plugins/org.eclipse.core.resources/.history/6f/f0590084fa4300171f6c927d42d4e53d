@@ -1,0 +1,35 @@
+package Ordenamiento;
+
+public class InsertionSort {
+	
+	public static int[] insertionSortInt(int[] input){
+		
+	    int temp;
+	    for (int i = 1; i < input.length; i++) {
+		    for(int j = i ; j > 0 ; j--){
+			    if(input[j] < input[j-1]){
+				    temp = input[j];
+				    input[j] = input[j-1];
+				    input[j-1] = temp;
+			    }
+		    }
+	    }
+	    return input;
+	}
+	
+	public static String[] insertionSortStr(String[] input){
+		
+	    String temp;
+	    for (int i = 1; i < input.length; i++) {
+		    for(int j = i ; j > 0 ; j--){
+			    if(input[j].compareTo(input[j-1]) < 0){
+				    temp = input[j];
+				    input[j] = input[j-1];
+				    input[j-1] = temp;
+			    }
+		    }
+	    }
+	    return input;
+	}
+
+}

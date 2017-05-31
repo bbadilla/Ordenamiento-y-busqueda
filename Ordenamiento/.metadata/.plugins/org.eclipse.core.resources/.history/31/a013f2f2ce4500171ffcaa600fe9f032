@@ -1,0 +1,245 @@
+package Ordenamiento;
+
+import java.util.ArrayList;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Integer[] arr = {5,4,7,20,1,44,73,2,9};
+		Integer[] arr1 = {100,5,6,87,4,1,2,4};
+		Integer[] arr2 = {198,42,69,9,23,1,44,5,20};
+		Integer[] arr3 = {5,996,4,1,2,38,75,6,2,3};
+		Integer[] arr4 = {99,7,85,4,12,2,7,63,52};
+		Integer[] arr5 = {99,7,85,4,12,2,7,63,52};
+		Integer[] arr6 = {100,5,6,87,4,1,2000,4};
+		
+		
+		String[] Sarr = {"bryan", "ema", "adrian", "alex", "conejo"};
+		String[] Sarr1 = {"as", "ema", "kolbi", "alex", "lula"};
+		String[] Sarr2 = {"as", "ema", "kolbi", "zoids", "lula"};
+		String[] Sarr3 = {"as", "ema", "kolbi", "zoids", "lula"};
+		String[] Sarr5 = {"as", "ema", "kolbi", "zoids", "lula"};
+		String[] Sarr6 = {"as", "ema", "kolbi", "zoids", "lula"};
+		
+		///////////////Array list
+		ArrayList<String> lista = new ArrayList<>();
+		
+		lista.add("kaka");
+		lista.add("juan");
+		lista.add("adsala");
+		lista.add("perro");
+		lista.add("rata");
+		lista.add("cometa");
+		lista.add("alo");
+		
+		ArrayList<String> lista1 = new ArrayList<>();
+		
+		lista1.add("kaka");
+		lista1.add("juan");
+		lista1.add("adsala");
+		lista1.add("perro");
+		lista1.add("rata");
+		lista1.add("cometa");
+		
+		
+		ArrayList<String> lista2 = new ArrayList<>();
+		
+		lista2.add("kaka");
+		lista2.add("juan");
+		lista2.add("adsala");
+		lista2.add("perro");
+		lista2.add("rata");
+		lista2.add("cometa");
+		
+		ArrayList<String> lista3 = new ArrayList<>();
+		
+		lista3.add("kaka");
+		lista3.add("juan");
+		lista3.add("adsala");
+		lista3.add("perro");
+		lista3.add("rata");
+		lista3.add("cometa");
+		
+		ArrayList<String> lista4 = new ArrayList<>();
+		
+		lista4.add("kaka");
+		lista4.add("juan");
+		lista4.add("adsala");
+		lista4.add("perro");
+		lista4.add("rata");
+		lista4.add("cometa");
+		
+		ArrayList<String> lista5 = new ArrayList<>();
+		
+		lista5.add("kaka");
+		lista5.add("juan");
+		lista5.add("adsala");
+		lista5.add("perro");
+		lista5.add("rata");
+		lista5.add("cometa");
+		
+		ArrayList<Integer> lista6 = new ArrayList<>();
+		
+		lista6.add(523);
+		lista6.add(20);
+		lista6.add(1);
+		lista6.add(5896);
+		lista6.add(54);
+		lista6.add(3);
+		//////////////Lista enlazada
+		
+		Lista<String> lis = new Lista<>();
+		lis.insertarUltimo("kaka");
+		lis.insertarUltimo("juan");
+		lis.insertarUltimo("adasala");
+		lis.insertarUltimo("perro");
+		lis.insertarUltimo("ahala");
+		lis.insertarUltimo("caca");
+		
+		Lista<String> lis1 = new Lista<>();
+		lis1.insertarUltimo("kaka");
+		lis1.insertarUltimo("juan");
+		lis1.insertarUltimo("adasala");
+		lis1.insertarUltimo("perro");
+		lis1.insertarUltimo("ahala");
+		lis1.insertarUltimo("caca");
+		
+		Lista<String> lis2 = new Lista<>();
+		lis2.insertarUltimo("kaka");
+		lis2.insertarUltimo("juan");
+		lis2.insertarUltimo("adasala");
+		lis2.insertarUltimo("perro");
+		lis2.insertarUltimo("ahala");
+		lis2.insertarUltimo("caca");
+		
+		Lista<String> lis3 = new Lista<>();
+		lis3.insertarUltimo("kaka");
+		lis3.insertarUltimo("juan");
+		lis3.insertarUltimo("adasala");
+		lis3.insertarUltimo("perro");
+		lis3.insertarUltimo("ahala");
+		lis3.insertarUltimo("caca");
+		
+		Lista<String> lis4 = new Lista<>();
+		lis4.insertarUltimo("kaka");
+		lis4.insertarUltimo("juan");
+		lis4.insertarUltimo("adasala");
+		lis4.insertarUltimo("perro");
+		lis4.insertarUltimo("ahala");
+		lis4.insertarUltimo("caca");
+		
+		Lista<Integer> lis5 = new Lista<>();
+		lis5.insertarUltimo(2);
+		lis5.insertarUltimo(96);
+		lis5.insertarUltimo(1);
+		lis5.insertarUltimo(5);
+		lis5.insertarUltimo(41);
+		lis5.insertarUltimo(100);
+		
+		/////////////
+		ArrayList<String> a = new ArrayList<String>();
+		a.add("ahs");
+		a.add("ahs");
+		a.add("ahs");
+		a.add("ahs");
+		a.add("ahs");
+		a.add("ahs");
+		for (int i = 0; i < lis4.size; i++){
+    		lis4.ModDato(i, a.get(i));
+    	}
+		lis4.mostrar();
+
+		
+		/////////////Burbuja******************************************************************************************************
+		System.out.println("Burbuja Int");
+		BubbleSort A = new BubbleSort();
+		A.bubbleArrayList(lista);
+		for(String i:lista){
+            System.out.print(i);
+            System.out.print(", ");
+		}
+		
+		System.out.println("");
+		
+		//////////////Selection*************************************************************************************************
+		System.out.println("Selection Int");
+		SelectionSort B = new SelectionSort();
+		B.selectionLinkedList(lis2.primero);
+		lis2.mostrar();
+		
+		System.out.println("");
+		
+		System.out.println("Selection String");
+		SelectionSort X = new SelectionSort();
+		X.selectionArrayList(lista2);
+		for(String i:lista2){
+            System.out.print(i);
+            System.out.print(", ");
+		}
+		
+		System.out.println("");
+		
+		//////////////Insertion*************************************************************************************************
+		System.out.println("Insertion int");
+		InsertionSort C = new InsertionSort();
+		C.insertionArrayList(lista1);
+		for(String i:lista1){
+            System.out.print(i);
+            System.out.print(", ");
+		}
+		
+		System.out.println("");
+		
+		System.out.println("Insertion String");
+		InsertionSort Y = new InsertionSort();
+		Y.insertionLinkedList(lis1.primero);
+		lis1.mostrar();
+		
+		System.out.println("");
+		
+		//////////////Shell*************************************************************************************************
+		System.out.println("Shell Int");
+		ShellSort D = new ShellSort();
+		D.shellLinked(lis3.primero, lis3);
+		lis3.mostrar();
+		
+		System.out.println("");
+		
+		System.out.println("Shell String");
+		ShellSort T = new ShellSort();
+		T.shellArrayList(lista3);
+		for(String i:lista3){
+            System.out.print(i);
+            System.out.print(", ");
+		}
+		
+		System.out.println("");
+		
+		//////////////Merge*************************************************************************************************
+		System.out.println("Merge");
+		MergeSort E = new MergeSort();
+		E.mergesort(lis4.primero);
+		lis4.mostrar();
+		System.out.println("");
+		
+		//////////////Quick*************************************************************************************************
+		System.out.println("Quick");
+		QuickSort F = new QuickSort();
+		F.quick(lis5);
+		lis5.mostrar();
+		System.out.println("");
+		
+		
+		//////////////Radix*************************************************************************************************
+		System.out.println("Radix");
+		RadixSort G = new RadixSort();
+		G.radixArrayList(lista6);
+	
+        System.out.print(lista6);
+        System.out.print(", ");
+		
+		
+
+	}
+
+}

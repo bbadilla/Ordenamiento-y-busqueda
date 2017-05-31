@@ -1,0 +1,61 @@
+package Ordenamiento;
+
+public class Main {
+
+	public static void main(String[] args) {
+		int[] arr = {5,4,7,20,1,44,73,2,9};
+		int[] arr1 = {100,5,6,87,4,1,2,4};
+		int[] arr2 = {198,42,69,9,23,1,44,5,20};
+		
+		System.out.println("Burbuja");
+		BurbbleSort A = new BurbbleSort();
+		A.BubbleSort(arr);
+		for(int i:arr){
+            System.out.print(i);
+            System.out.print(", ");
+		}
+		
+		System.out.println("");
+		
+		System.out.println("Selection");
+		SelectionSort B = new SelectionSort();
+		B.selectionSort(arr1);
+		for(int i:arr1){
+            System.out.print(i);
+            System.out.print(", ");
+		}
+		
+		System.out.println("");
+		
+		System.out.println("Insertion");
+		InsertionSort C = new InsertionSort();
+		C.insertionSort(arr1);
+		for(int i:arr1){
+            System.out.print(i);
+            System.out.print(", ");
+		}
+		
+		System.out.println("");
+		
+		System.out.println("Shell");
+		ShellSort D = new ShellSort();
+		D.shellSort(arr1);
+		for(int i:arr1){
+            System.out.print(i);
+            System.out.print(", ");
+		}
+		
+		System.out.println("");
+		
+		System.out.println("Merge");
+		MergeSort E = new MergeSort();
+		E.sort(arr2);
+		for(int i:arr2){
+            System.out.print(i);
+            System.out.print(", ");
+		}
+		
+
+	}
+
+}

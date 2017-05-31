@@ -1,0 +1,59 @@
+package Ordenamiento;
+
+import java.util.ArrayList;
+
+public class SelectionSort<E> {
+	
+	 //para arrays
+	 public static <E extends Comparable<E>> void selectionArray(E[] arr){
+         
+	        for (int i = 0; i < arr.length - 1; i++)
+	        {
+	            int index = i;
+	            for (int j = i + 1; j < arr.length; j++)
+	                if (arr[j].compareTo(arr[index])<0 )
+	                    index = j;
+	      
+	            E smallerNumber = arr[index]; 
+	            arr[index] = arr[i];
+	            arr[i] = smallerNumber;
+	        }
+	 }
+	 
+	 ///para arraylist
+	 public static <E extends Comparable<E>> void selectionArrayList(ArrayList<E> arr){
+         
+		 for (int i = 0; i < arr.size(); i++) {
+	            // find position of smallest num between (i + 1)th element and last element
+	            int pos = i;
+	            for (int j = i; j < arr.size(); j++) {
+	                if (arr.get(j).compareTo(arr.get(pos))<0 )
+	                    pos = j;
+	            }
+	            // Swap min (smallest num) to current position on array
+	            E min = arr.get(pos);
+	            arr.set(pos, arr.get(i));
+	            arr.set(i, min);
+	        }
+	 }
+	 
+	 //para linkedlist
+	 
+	 public static <E extends Comparable<E>> void selectionLinkedList(Nodo<E> head){
+         
+		 Nodo<E> i, j;
+		 i = head;
+		 for ( i = head; i != null; i.getSiguiente()) {
+	            // find position of smallest num between (i + 1)th element and last element
+	            Nodo<E> pos = i;
+	            for ( j = i; j != null; j.getSiguiente()) {
+	                if (j.getDato().compareTo(pos.getDato())<0 )
+	                    pos = j;
+	            }
+	            // Swap min (smallest num) to current position on array
+	            E min = pos.getDato();
+	            pos.setDato( i.getDato());
+	            i.setDato(min);
+	        }
+	 }
+}

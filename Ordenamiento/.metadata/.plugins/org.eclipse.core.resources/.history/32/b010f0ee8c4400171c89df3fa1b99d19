@@ -1,0 +1,62 @@
+package Ordenamiento;
+
+import java.util.ArrayList;
+
+public class InsertionSort<E> {
+
+	///Para arrays
+	public static <E extends Comparable<E>> void insertionArray(E[] input){
+		
+	    E temp;
+	    for (int i = 1; i < input.length; i++) {
+		    temp = input[i];
+		    int j = i-1;
+		    while(j >= 0 && temp.compareTo(input[j])<0){
+		    	input[j+1] = input[j];
+		    	j--;
+		    }
+		    input[j+1]=temp;
+	    }
+	}
+	
+	///Para arrays List
+	public static <E extends Comparable<E>> void insertionArrayList(ArrayList<E> input){
+		
+		 E temp;
+		    for (int i = 1; i < input.size(); i++) {
+			    temp = input.get(i);
+			    int j = i-1;
+			    while(j >= 0 && temp.compareTo(input.get(j))<0){
+			    	input.set(j+1, input.get(j));
+			    	j--;
+			    }
+			    input.set(j+1, temp);
+		    }
+	}
+	
+	public static <E extends Comparable<E>> void insertionLinkedList(Nodo<E> current){
+		
+		E temp;
+		Nodo<E> head, puntero;
+		head = current;
+		puntero = head;
+        current = current.getSiguiente();
+        
+        while(current != null){
+        	puntero = head;
+        	
+        	while(puntero.getSiguiente()!= current){
+        		if(puntero.getDato().compareTo(current.getDato())<0){
+        			temp = current.getDato();
+        			current.setDato(puntero.getDato());
+        			puntero.setDato(temp);
+        		}
+        		else{
+        			puntero = puntero.getSiguiente();
+        		}
+        	}
+        	current = current.getSiguiente();
+        }  
+	}
+
+}
